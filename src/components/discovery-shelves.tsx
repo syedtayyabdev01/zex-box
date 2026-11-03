@@ -19,7 +19,10 @@ function ShelfCard({ item, rank }: { item: CatalogItem; rank?: number }) {
   return (
     <Link className="shelf-card" href={`/title/${item.mediaType}/${item.id}`}>
       <div className="shelf-poster">
-        {item.posterUrl ? (\n          // eslint-disable-next-line @next/next/no-img-element\n          <img src={item.posterUrl} alt={`${item.title} poster`} loading="lazy" />\n        ) : <span className="shelf-placeholder">Z</span>}
+        {item.posterUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={item.posterUrl} alt={`${item.title} poster`} loading="lazy" />
+        ) : <span className="shelf-placeholder">Z</span>}
         {typeof rank === "number" && <span className="shelf-rank">{String(rank).padStart(2, "0")}</span>}
         <span className="shelf-type">{item.mediaType === "movie" ? "FILM" : "SERIES"}</span>
       </div>
