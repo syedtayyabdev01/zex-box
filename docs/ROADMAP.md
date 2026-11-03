@@ -18,10 +18,10 @@
 - [ ] Run install, typecheck, lint, and production build.
 
 ## Phase 2 — title experience
-- [ ] Title detail pages with overview, genres, cast, seasons, and episode guide.
+- [x] Title detail pages with overview, genres, cast, seasons, and episode guide.
 - [ ] Trailer links from official/authorized providers.
-- [ ] Region-aware availability where a permitted source provides it.
-- [ ] Clear unavailable playback state when no authorized source exists.
+- [x] Region-aware availability through TMDB's JustWatch-powered provider metadata.
+- [x] Clear playback/availability state when no authorized source exists.
 
 ## Phase 3 — authorized playback
 - [ ] Identify licensed/public-domain/user-owned content sources.
@@ -35,3 +35,12 @@
 - [ ] Test keyboard navigation, reduced motion, responsive layouts, and performance.
 - [ ] Deploy to Vercel and verify production routes.
 - [ ] Connect a custom domain only after production smoke tests.
+
+
+## Phase 2.5 — curated discovery refresh (2026-11-04)
+- [x] Add Top 10 today collection.
+- [x] Add Anime, Indian cinema, Asian drama, Hollywood, and upcoming shelves.
+- [x] Add horizontal responsive shelf cards and loading skeletons.
+- [x] Add collection API routing through the existing server-side TMDB adapter.
+- [x] Expand reference audit for the six supplied sites and document inaccessible references.
+- [ ] Verify live data after the TMDB token is configured.
