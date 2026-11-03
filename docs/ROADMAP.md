@@ -1,34 +1,37 @@
-# ZEX BOX — Implementation Roadmap
+# ZEX BOX — Implementation roadmap
 
-## Phase 0 — Foundation
-- [x] Create GitHub repository.
-- [x] Record product requirements and legal/data boundaries.
-- [x] Define architecture and delivery phases.
-- [ ] Verify initial Next.js shell with a clean install/build.
+## Phase 0 — foundation
+- [x] Create independent product identity and repository.
+- [x] Audit the public reference homepage without copying its implementation.
+- [x] Define playback authorization and metadata boundaries.
+- [x] Build responsive Next.js application shell.
 
-## Phase 1 — Original UI
-- [ ] Create ZEX BOX design tokens and responsive shell.
-- [ ] Build header, navigation, hero, content rails, cards, and footer.
-- [ ] Add skeletons, empty states, and accessible focus behavior.
-- [ ] Test narrow mobile, tablet, and desktop breakpoints.
+## Phase 1 — discovery MVP
+- [x] Add server-side TMDB catalog adapter.
+- [x] Add trending titles endpoint.
+- [x] Add movie and TV search.
+- [x] Add media-type filters.
+- [x] Add device-local watchlist without login.
+- [x] Add provider setup and error states.
+- [ ] Add approved TMDB logo asset to credits before public launch.
+- [ ] Configure TMDB developer token and verify live API behavior.
+- [ ] Run install, typecheck, lint, and production build.
 
-## Phase 2 — Discovery
-- [ ] Select an authorized catalog metadata provider.
-- [ ] Implement provider adapter and server-side validation.
-- [ ] Add search, filters, pagination, and title details.
-- [ ] Add locally persisted watchlist.
+## Phase 2 — title experience
+- [ ] Title detail pages with overview, genres, cast, seasons, and episode guide.
+- [ ] Trailer links from official/authorized providers.
+- [ ] Region-aware availability where a permitted source provides it.
+- [ ] Clear unavailable playback state when no authorized source exists.
 
-## Phase 3 — Playback
-- [ ] Select authorized playback providers or public-domain sources.
-- [ ] Implement provider-specific source verification and handoff.
-- [ ] Build clear unavailable/error states.
-- [ ] Test playback only against sources with documented authorization.
+## Phase 3 — authorized playback
+- [ ] Identify licensed/public-domain/user-owned content sources.
+- [ ] Integrate only provider-approved playback URLs or official embeds.
+- [ ] Verify desktop/mobile playback, errors, subtitles, and accessibility.
+- [ ] No scraping, DRM bypass, or unlicensed streams.
 
-## Phase 4 — Release
-- [ ] Connect GitHub repository to Vercel.
-- [ ] Configure environment variables securely.
-- [ ] Run typecheck, lint, build, accessibility, and responsive QA.
-- [ ] Verify production deployment and domain.
-
-## Working agreement
-No dependency installation, build, deployment, destructive operation, or external account change is performed on the user's local machine without explicit approval. GitHub file changes are committed to this repository as requested.
+## Phase 4 — release quality
+- [ ] Add privacy/about/credits pages and legal contact route.
+- [ ] Add metadata-provider attribution logo and verify licensing.
+- [ ] Test keyboard navigation, reduced motion, responsive layouts, and performance.
+- [ ] Deploy to Vercel and verify production routes.
+- [ ] Connect a custom domain only after production smoke tests.
