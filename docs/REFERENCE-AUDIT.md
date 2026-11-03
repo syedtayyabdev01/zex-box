@@ -49,3 +49,43 @@ The homepage also displays a disclaimer stating that video and picture copyright
 
 ## Initial finding
 MovieBox's homepage is a discovery-first entertainment catalog with many regional and format-specific shelves. ZEX BOX can improve the experience through stronger hierarchy, responsive navigation, transparent source availability, and a genuinely account-free interface. This is a reference for product patterns, not a template to clone.
+
+
+## Additional reference review — 2026-11-04
+
+The following public homepages were reviewed as product-pattern references. Availability and visible content can change; this review does not validate their licensing or private backends.
+
+### ZXCStream — https://zxcstream.com/
+- Visible navigation includes Home, Search, Movies, and Series.
+- Homepage exposes a Top 10 section, All/Movies/TV controls, and provider/studio/network discovery.
+- ZEX BOX adaptation: daily chart shelf, clear media-type navigation, and future provider/studio filters backed by verified metadata.
+- Not adopted: third-party stream resolution or any undocumented source endpoint.
+
+### Lunoflix — https://lunoflix.fun/
+- Visible navigation separates Home, Movies, TV Shows, and Anime.
+- Homepage groups Top 10 movies, weekly trending, browse links, popular genres, and streaming-service categories.
+- ZEX BOX adaptation: dedicated Top 10, Anime, genre-ready, and service-discovery sections.
+- Not adopted: unsupported playback promises or copied assets.
+
+### MovieBox — https://movie-box.co/
+- Visible homepage includes search, language choices, a featured-title area, and numerous content shelves.
+- Examples include Trending Drama, Trending Movie, Indian Cinema, Hollywood, Asian Drama, Anime in Hindi, new releases, Bollywood, South Indian, Punjabi, Bengali, and Indian Drama.
+- ZEX BOX adaptation: fewer, curated regional shelves (Indian cinema, Asian drama, Anime, Hollywood) with clear labels and mobile horizontal scrolling.
+- Not adopted: app-download promotions, affiliate promotions, proprietary media endpoints, or unverified playback claims.
+
+### Raflix — https://raflix.xyz/
+- The supplied domain did not return a readable homepage during this audit. Search results surfaced third-party descriptions of a similarly named platform, but those are not treated as authoritative evidence about this exact URL.
+- ZEX BOX adaptation: no feature is attributed to this URL until it can be inspected directly.
+
+### Heartive Plays TV — https://heartiveplaystv.pages.dev/#/
+- Automated public-page inspection did not return readable content. No implementation assumptions are made from the URL alone.
+
+### KinoHD — https://kinohd.app/
+- Automated public-page inspection did not return readable content. No implementation assumptions are made from the URL alone.
+
+### Combined ZEX BOX direction
+- One original home experience with clear Movies, Series, Anime, and My List navigation.
+- Daily Top 10, weekly trending, upcoming titles, Anime, Indian cinema, Asian drama, and Hollywood shelves.
+- Search, pagination, title details, cast, trailer handoff, season/episode guide, and local watchlist.
+- Regional/provider availability is informational and must link to legitimate services; it does not imply ZEX BOX has playback rights.
+- Keep the no-ad, no-login product promise. Do not add accounts, paid tiers, pop-up scripts, stream scrapers, or unverified player servers.
