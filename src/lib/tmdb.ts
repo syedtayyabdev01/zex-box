@@ -16,10 +16,11 @@ type TmdbItem = {
   vote_average?: number;
 };
 
-type TmdbResponse = {
+export type TmdbResponse = {
   page?: number;
   total_pages?: number;
   results?: TmdbItem[];
+  [key: string]: unknown;
 };
 
 export class TmdbError extends Error {
@@ -39,6 +40,10 @@ export function isTmdbConfigured() {
   return Boolean(getToken());
 }
 
+export function tmdbImage(path: string | null | undefined, size = "w500") {
+  return path ? `${IMAGE_BASE}/${size}${path}` : null;
+}
+
 function normalize(item: TmdbItem, fallbackKind: Exclude<MediaKind, "all"> | null): CatalogItem | null {
   const mediaType = item.media_type === "tv" || item.media_type === "movie"
     ? item.media_type
@@ -54,14 +59,14 @@ function normalize(item: TmdbItem, fallbackKind: Exclude<MediaKind, "all"> | nul
     mediaType,
     title,
     overview: item.overview?.trim() ?? "",
-    posterUrl: item.poster_path ? `${IMAGE_BASE}/w500${item.poster_path}` : null,
-    backdropUrl: item.backdrop_path ? `${IMAGE_BASE}/w1280${item.backdrop_path}` : null,
+    posterUrl: tmdbImage(item.poster_path, "w500"),
+    backdropUrl: tmdbImage(item.backdrop_path, "w1280"),
     year: date?.slice(0, 4) || null,
     rating: typeof item.vote_average === "number" ? item.vote_average : null
   };
 }
 
-export async function tmdbRequest(path: string, params: Record<string, string> = {}) {
+export async function tmdbRequest<T = TmdbResponse>(path: string, params: Record<string, string> = {}): Promise<T> {
   const token = getToken();
   if (!token) throw new TmdbError(503, "The catalog provider is not configured yet.");
 
@@ -70,14 +75,14 @@ export async function tmdbRequest(path: string, params: Record<string, string> =
 
   const response = await fetch(url, {
     headers: { Authorization: `Bearer ${token}`, accept: "application/json" },
-    cache: "no-store"
+    next: { revalidate: 1800 }
   });
 
   if (!response.ok) {
     if (response.status === 429) throw new TmdbError(429, "The catalog provider rate limit was reached. Please try again shortly.");
     throw new TmdbError(response.status, "The catalog provider could not complete this request.");
   }
-  return await response.json() as TmdbResponse;
+  return await response.json() as T;
 }
 
 export function normalizeResults(payload: TmdbResponse, fallbackKind: Exclude<MediaKind, "all"> | null) {
