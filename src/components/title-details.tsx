@@ -110,7 +110,7 @@ export default function TitleDetails({ mediaType, id }: Props) {
   }
 
   if (error || !detail) {
-    return <main className="detail-shell"><Link className="back-link" href="/">← Back to discover</Link><div className="detail-state"><strong>We couldn't load this title.</strong><p>{error ?? "The title may be unavailable."}</p><Link className="detail-action secondary-action" href="/">Return to ZEX BOX</Link></div></main>;
+    return <main className="detail-shell"><Link className="back-link" href="/">← Back to discover</Link><div className="detail-state"><strong>We could not load this title.</strong><p>{error ?? "The title may be unavailable."}</p><Link className="detail-action secondary-action" href="/">Return to ZEX BOX</Link></div></main>;
   }
 
   const runtime = formatRuntime(detail.runtime);
