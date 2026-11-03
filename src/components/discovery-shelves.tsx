@@ -19,7 +19,7 @@ function ShelfCard({ item, rank }: { item: CatalogItem; rank?: number }) {
   return (
     <Link className="shelf-card" href={`/title/${item.mediaType}/${item.id}`}>
       <div className="shelf-poster">
-        {item.posterUrl ? <img src={item.posterUrl} alt={`${item.title} poster`} loading="lazy" /> : <span className="shelf-placeholder">Z</span>}
+        {item.posterUrl ? (\n          // eslint-disable-next-line @next/next/no-img-element\n          <img src={item.posterUrl} alt={`${item.title} poster`} loading="lazy" />\n        ) : <span className="shelf-placeholder">Z</span>}
         {typeof rank === "number" && <span className="shelf-rank">{String(rank).padStart(2, "0")}</span>}
         <span className="shelf-type">{item.mediaType === "movie" ? "FILM" : "SERIES"}</span>
       </div>
@@ -71,7 +71,7 @@ export default function DiscoveryShelves() {
         <div><p className="eyebrow">A WORLD OF STORIES</p><h2>Pick your <em>next obsession.</em></h2></div>
         <p>Daily charts, anime, Indian cinema and stories from across Asia — all in one place.</p>
       </div>
-      {shelves.map((shelf, index) => {
+      {shelves.map((shelf) => {
         const items = data[shelf.key] ?? [];
         if (!loading && items.length === 0) return null;
         return (
