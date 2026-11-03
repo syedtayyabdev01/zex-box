@@ -5,7 +5,7 @@ export default function HomePage() {
     <main>
       <header className="topbar">
         <a className="brand" href="/" aria-label="ZEX BOX home"><span className="brand-mark">Z</span><span>ZEX <b>BOX</b></span></a>
-        <nav aria-label="Main navigation"><a className="active" href="#catalog">Discover</a><a href="#catalog" onClick={() => undefined}>Movies</a><a href="#catalog">Series</a><a href="#watchlist">My list</a></nav>
+        <nav aria-label="Main navigation"><a className="active" href="#catalog">Discover</a><a href="#catalog">Movies</a><a href="#catalog">Series</a><a href="#watchlist">My list</a></nav>
         <a className="watchlist-link" href="#watchlist">Your list <span>↗</span></a>
       </header>
 
