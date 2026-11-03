@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
       if (kind !== "all") fallbackKind = kind;
     } else {
       path = `/trending/${kind}/week`;
+      if (kind !== "all") fallbackKind = kind;
     }
 
     const payload = await tmdbRequest(path, mode === "search" ? { ...requestParams, query } : requestParams);
