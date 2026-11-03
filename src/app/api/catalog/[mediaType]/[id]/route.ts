@@ -24,13 +24,14 @@ type RawTitle = {
 };
 type RawCredits = { cast?: Array<{ id: number; name: string; character?: string; profile_path?: string | null }> };
 type RawVideos = { results?: Array<{ key: string; site: string; type: string; official?: boolean }> };
+type ProviderEntry = { provider_id: number; provider_name: string; logo_path: string };
 type RawProviders = { results?: Record<string, {
   link?: string;
-  flatrate?: Array<{ provider_id: number; provider_name: string; logo_path: string }>;
-  rent?: Array<{ provider_id: number; provider_name: string; logo_path: string }>;
-  buy?: Array<{ provider_id: number; provider_name: string; logo_path: string }>;
-  free?: Array<{ provider_id: number; provider_name: string; logo_path: string }>;
-  ads?: Array<{ provider_id: number; provider_name: string; logo_path: string }>;
+  flatrate?: ProviderEntry[];
+  rent?: ProviderEntry[];
+  buy?: ProviderEntry[];
+  free?: ProviderEntry[];
+  ads?: ProviderEntry[];
 }> };
 
 export async function GET(request: NextRequest, context: RouteContext) {
@@ -56,11 +57,10 @@ export async function GET(request: NextRequest, context: RouteContext) {
 
     const regional = watchData.results?.[region];
     const providers: WatchProvider[] = [];
-    const addProviders = (items: RawProviders["results"] extends Record<string, infer T> ? T[keyof T] : never, type: WatchProvider["type"]) => {
+    const addProviders = (items: ProviderEntry[] | undefined, type: WatchProvider["type"]) => {
       if (!Array.isArray(items)) return;
       for (const item of items) {
-        if (!item || typeof item !== "object" || !("provider_id" in item)) continue;
-        const provider = item as { provider_id: number; provider_name: string; logo_path: string };
+        const provider = item;
         if (!providers.some((existing) => existing.id === provider.provider_id)) {
           providers.push({
             id: provider.provider_id,
