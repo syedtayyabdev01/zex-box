@@ -14,10 +14,12 @@ A free-to-use, ad-free, no-account entertainment discovery experience.
 
 ## Current functionality
 - Responsive original ZEX BOX landing experience.
-- Live trending catalog and movie/series search through the TMDB API adapter.
+- Live trending catalog, movie/series search, and curated Top 10, Anime, Indian cinema, Asian drama, Hollywood, and upcoming shelves through the server-side TMDB adapter.
 - Filters for all titles, movies, and series.
+- Responsive horizontal discovery shelves with loading states and title-detail navigation.
 - Device-local watchlist; no account or cloud profile.
 - Explicit provider setup and failure states; no fabricated catalog results.
+- Detail pages with cast, trailers, season/episode guides, and region-aware provider availability.
 - TMDB attribution notice in the credits area.
 
 ## Configure catalog metadata
