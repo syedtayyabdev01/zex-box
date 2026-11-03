@@ -1,10 +1,11 @@
+import Link from "next/link";
 import CatalogExplorer from "@/components/catalog-explorer";
 
 export default function HomePage() {
   return (
     <main>
       <header className="topbar">
-        <a className="brand" href="/" aria-label="ZEX BOX home"><span className="brand-mark">Z</span><span>ZEX <b>BOX</b></span></a>
+        <Link className="brand" href="/" aria-label="ZEX BOX home"><span className="brand-mark">Z</span><span>ZEX <b>BOX</b></span></Link>
         <nav aria-label="Main navigation"><a className="active" href="#catalog">Discover</a><a href="#catalog">Movies</a><a href="#catalog">Series</a><a href="#watchlist">My list</a></nav>
         <a className="watchlist-link" href="#watchlist">Your list <span>↗</span></a>
       </header>
@@ -25,7 +26,7 @@ export default function HomePage() {
         <section className="promise"><div><p className="eyebrow">THE ZEX BOX PROMISE</p><h2>Entertainment,<br /><em>without the extras.</em></h2></div><div className="promise-points"><p><b>NO ADS</b><span>Nothing between you and discovery.</span></p><p><b>NO ACCOUNT</b><span>Open the site and start exploring.</span></p><p><b>NO FEES</b><span>Free-to-use, with no subscription tiers.</span></p><p><b>YOUR LIST, YOUR DEVICE</b><span>Saved locally. No profile required.</span></p></div></section>
       </div>
       <footer>
-        <a className="brand" href="/"><span className="brand-mark">Z</span><span>ZEX <b>BOX</b></span></a>
+        <Link className="brand" href="/"><span className="brand-mark">Z</span><span>ZEX <b>BOX</b></span></Link>
         <p>Independent discovery. Thoughtfully built.</p>
         <span>© {new Date().getFullYear()} ZEX BOX</span>
         <div className="tmdb-credit"><a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">The Movie Database (TMDB)</a><span>This product uses the TMDB API but is not endorsed or certified by TMDB.</span></div>
