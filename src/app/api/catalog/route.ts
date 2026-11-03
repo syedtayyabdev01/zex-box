@@ -6,6 +6,26 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const validKinds: MediaKind[] = ["movie", "tv", "all"];
+const collections = ["top10", "anime", "indian", "asian", "upcoming", "hollywood"] as const;
+type Collection = (typeof collections)[number];
+
+function collectionRequest(collection: Collection) {
+  const common = { language: "en-US", include_adult: "false" };
+  switch (collection) {
+    case "top10":
+      return { path: "/trending/all/day", kind: null, params: common };
+    case "anime":
+      return { path: "/discover/tv", kind: "tv" as const, params: { ...common, with_genres: "16", with_original_language: "ja", sort_by: "popularity.desc" } };
+    case "indian":
+      return { path: "/discover/movie", kind: "movie" as const, params: { ...common, with_origin_country: "IN", sort_by: "popularity.desc" } };
+    case "asian":
+      return { path: "/discover/tv", kind: "tv" as const, params: { ...common, with_origin_country: "KR|JP|CN|TH", sort_by: "popularity.desc" } };
+    case "upcoming":
+      return { path: "/movie/upcoming", kind: "movie" as const, params: common };
+    case "hollywood":
+      return { path: "/discover/movie", kind: "movie" as const, params: { ...common, with_origin_country: "US", sort_by: "popularity.desc" } };
+  }
+}
 
 export async function GET(request: NextRequest) {
   if (!isTmdbConfigured()) {
@@ -17,7 +37,7 @@ export async function GET(request: NextRequest) {
   }
 
   const params = request.nextUrl.searchParams;
-  const mode = params.get("mode") === "search" ? "search" : "trending";
+  const mode = params.get("mode") === "search" ? "search" : params.get("mode") === "collection" ? "collection" : "trending";
   const kindValue = params.get("kind") ?? "all";
   const kind: MediaKind = validKinds.includes(kindValue as MediaKind) ? kindValue as MediaKind : "all";
   const query = (params.get("query") ?? "").trim().slice(0, 100);
@@ -30,17 +50,27 @@ export async function GET(request: NextRequest) {
   try {
     let path: string;
     let fallbackKind: "movie" | "tv" | null = null;
-    const requestParams = { language: "en-US", page: String(page), include_adult: "false" };
+    let requestParams: Record<string, string> = { language: "en-US", page: String(page), include_adult: "false" };
 
-    if (mode === "search") {
+    if (mode === "collection") {
+      const collection = params.get("collection") as Collection | null;
+      if (!collection || !collections.includes(collection)) {
+        return NextResponse.json({ results: [], page: 1, totalPages: 0, provider: "tmdb", error: "provider_error", message: "Unknown discovery collection." }, { status: 400 });
+      }
+      const selected = collectionRequest(collection);
+      path = selected.path;
+      fallbackKind = selected.kind;
+      requestParams = { ...selected.params, page: String(page) };
+    } else if (mode === "search") {
       path = kind === "all" ? "/search/multi" : `/search/${kind}`;
       if (kind !== "all") fallbackKind = kind;
+      requestParams = { ...requestParams, query };
     } else {
       path = `/trending/${kind}/week`;
       if (kind !== "all") fallbackKind = kind;
     }
 
-    const payload = await tmdbRequest(path, mode === "search" ? { ...requestParams, query } : requestParams);
+    const payload = await tmdbRequest(path, requestParams);
     const results = normalizeResults(payload, fallbackKind);
     return NextResponse.json({
       results,
